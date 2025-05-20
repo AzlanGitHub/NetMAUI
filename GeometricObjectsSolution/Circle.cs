@@ -58,14 +58,30 @@ namespace GeometricObjectsSolution
             Radius = radius;
         }
 
-        public static void Main(string[] args)
+        public void Move(double dx, double dy)
+        {
+            XCoordinate += dx;
+            YCoordinate += dy;
+        }
+
+        public  int Bigger(Circle kreis)
+        {
+            if(Radius > kreis.Radius)
+                return 1;
+            else if (Radius < kreis.Radius)
+                return -1;
+            else
+                return 0;
+        }
+
+        public static void Print()
         {
             Circle kreis = new Circle(0, 0, 5);
             Console.WriteLine($"Der Umfang des Kreises beträgt: {kreis.GetPerimeter()}");
             Console.WriteLine($"Die Fläche des Kreises beträgt: {kreis.GetArea()}");
             int height = 10;
             Console.WriteLine($"Das Volumen des Kreises beträgt: {kreis.GetArea()*height}");
-            Console.WriteLine(args[0]);
+            //Console.WriteLine(args[0]);
            // Console.WriteLine(args[1]);
         }
     }
