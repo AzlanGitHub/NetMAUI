@@ -74,6 +74,16 @@ namespace GeometricObjectsSolution
                 return 0;
         }
 
+        public static int Compare(Circle kreis1, Circle kreis2)
+        {
+            if (kreis1.Radius > kreis2.Radius)
+                return 1;
+            else if (kreis1.Radius < kreis2.Radius)
+                return -1;
+            else
+                return 0;
+        }
+
         public static void Print()
         {
             Circle kreis = new Circle(0, 0, 5);
