@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GeometricObjectsSolution
+namespace GeometricObjectsSolution.geometric
 {
     public class Circle
     {

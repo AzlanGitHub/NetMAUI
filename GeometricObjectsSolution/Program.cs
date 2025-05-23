@@ -1,12 +1,108 @@
 ﻿// See https://aka.ms/new-console-template for more information
-using GeometricObjectsSolution;
+using GeometricObjectsSolution.geometric;
+using GeometricObjectsSolution.fahrzeuge;
 using static System.Console;
+using System.Runtime.CompilerServices;
+using System.Collections.Generic;
+using System.Collections;
 
 internal class Program
 {
     private static void Main(string[] args)
     {
-        TestCircle();
+       // TestCircle();
+        //TestCerchio();
+        TestFahrzeug();
+    }
+
+    public static void TestFahrzeug()
+    {
+        // Testfälle für Luftfahrzeug und seine Unterklassen
+        Luftfahrzeug flugzeug = new Flugzeug();
+        
+        flugzeug.Hersteller = "Airbus";
+        flugzeug.Modell = "A320";
+        flugzeug.Baujahr = 2010;
+        flugzeug.Sitzplaetze = 180;
+
+        ((Flugzeug)flugzeug).Spannweite = 35.8;
+        ((Flugzeug)flugzeug).Hoechstgeschwindigkeit = 940;
+
+        Luftfahrzeug hubschrauber = new Hubschrauber();
+        hubschrauber.Hersteller = "Eurocopter";
+        hubschrauber.Modell = "EC135";
+        hubschrauber.Baujahr = 2005;
+        hubschrauber.Sitzplaetze = 6;
+
+        ((Hubschrauber)hubschrauber).RotorDurchmesser = 10.2;
+        ((Hubschrauber)hubschrauber).Maximalgeschwindigkeit = 350;
+       
+
+        Luftfahrzeug drohne = new Drohne();
+        drohne.Hersteller = "DJI";
+        drohne.Modell = "Mavic Pro";
+        drohne.Baujahr = 2018;
+        drohne.Sitzplaetze = 0; 
+        ((Drohne)drohne).MaximaleFlughöhe = 100; // in Metern
+        ((Drohne)drohne).Flugzeit = 30; // in Minuten
+
+        Luftfahrzeug segelmotor = new Motorsegler ();
+        segelmotor.Hersteller = "Piper";
+        segelmotor.Modell = "PA-28";
+        segelmotor.Baujahr = 2015;
+        segelmotor.Sitzplaetze = 4;
+        ((Motorsegler)segelmotor).Spannweite = 11.4;
+        ((Motorsegler)segelmotor).Hoechstgeschwindigkeit = 200;
+
+        Luftfahrzeug segelflugzeugt = new Segelflugzeug();
+        segelflugzeugt.Hersteller = "Grob";
+        segelflugzeugt.Modell = "G-109";
+        segelflugzeugt.Baujahr = 2012;
+
+        List<Luftfahrzeug> fahrzeuge = new List<Luftfahrzeug>();
+        fahrzeuge.Add(flugzeug);
+        fahrzeuge.Add(hubschrauber);
+        fahrzeuge.Add(drohne);
+        fahrzeuge.Add(segelmotor);
+        
+        foreach (Luftfahrzeug luftfahrzeug in fahrzeuge)
+        {
+            luftfahrzeug.starten();
+            luftfahrzeug.fliegen();
+            luftfahrzeug.landen();
+            DoSomething(luftfahrzeug);
+
+        }
+
+        // Konvertierung von Luftfahrzeug zu Flugzeug
+        Luftfahrzeug luftflugzeug2 = new Flugzeug();
+        Flugzeug flg1 = (Flugzeug)luftflugzeug2;
+        Flugzeug flg2 = luftflugzeug2 as Flugzeug;
+        Flugzeug flg3 = flg1;
+
+
+
+    }
+
+    public static void DoSomething(Luftfahrzeug lfzg)
+    {
+       if(lfzg != null)
+        {
+            if (lfzg is Flugzeug)
+                Console.WriteLine($"Spannweite: {((Flugzeug)lfzg).Spannweite}");
+            else if (lfzg is Hubschrauber)
+                Console.WriteLine($"Rotor Durchmesser: {((Hubschrauber)lfzg).RotorDurchmesser}");
+            else if (lfzg is Drohne)
+                Console.WriteLine($"Maximale Flughöhe: {((Drohne)lfzg).MaximaleFlughöhe}");
+            else if (lfzg is Motorsegler)
+                Console.WriteLine($"Spannweite: {((Motorsegler)lfzg).Spannweite}");
+            else if (lfzg is Segelflugzeug)
+                Console.WriteLine($"Segelflugzeug: {lfzg.Modell}");
+        }
+        else
+        {
+            WriteLine("Das Luftfahrzeug ist null.");
+        }
     }
 
     #region test circle
